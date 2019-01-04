@@ -63,6 +63,18 @@ await set_position(MyModel.query(), object_id, position, {
 })
 ```
 
+## Sharding
+
+Note that the ordering can be managed separately in different shards (slices) of the table. For example, if `MyModel` has parent/child relation, children of a certain parent can be reordered with:
+
+```ts
+await set_position(MyModel.query().where({ parent }), child_id, position)
+```
+
+## Non-unique `sort_order` field
+
+While not recommended, non-unique `sort_order` values are supported. `set_position` will work correctly even if e.g. all values are set to 0. (In particular, that means you don't necessarily have to come up with a data migration when introducing the custom order field).
+
 ## Caveats
 
 * The implementation is not completely thread safe, as it runs 2 SQL queries without a transaction.
