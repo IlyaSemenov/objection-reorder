@@ -1,7 +1,7 @@
 {
   "name": "objection-reorder",
   "version": "0.0.0-development",
-  "description": "Reorder objects within Objection.js query",
+  "description": "Reorder objects (set object position) within Objection.js query",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "source": "src/index.ts",
