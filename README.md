@@ -7,8 +7,8 @@ id | name | sort_order
 ---+------+-----------
 10 | Foo  | 0
 3  | Bar  | 1
-7  | Baz  | 2
-8  | Qoox | 3
+8  | Baz  | 2
+7  | Qoox | 3
 ```
 
 and you have a UI where a user may drag and drop objects to reorder them, producing API calls like:
@@ -17,22 +17,22 @@ and you have a UI where a user may drag and drop objects to reorder them, produc
 POST /objects/10/order?position=2
 ```
 
-(meaning put Foo onto position 2, between Baz and Qoox)
+(meaning: *"put Foo onto position 2, between Baz and Qoox"*)
 
-and you have the backend server with Node.js and Objection.js,
+and you have a backend server with Node.js and Objection.js,
 
-then this library provides a utility method to update `sort_order` accordingly:
+then this library provides a utility function to update `sort_order` accordingly:
 
 ```
 id | name | sort_order
 ---+------+-----------
 3  | Bar  | 1
-7  | Baz  | 2
+8  | Baz  | 2
 10 | Foo  | 3 <--- object moved here, sort_order updated.
-8  | Qoox | 4
+7  | Qoox | 4
 ```
 
-*(The example is only provided for illustration. The actual resulting values of `sort_order` will be different for optimization purposes, but the order of objects will be guaranteed to be correct.)*
+*(The example is provided for illustration. The actual resulting values of `sort_order` could be different due to SQL updates optimization, but the resulting order of objects is guaranteed to be correct.)*
 
 ## Installation
 
