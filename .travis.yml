@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - 10
+cache:
+  directories:
+    - ~/.npm
+notifications:
+  email: false
+branches:
+  only:
+    - master
+jobs:
+  include:
+    - stage: release
+      node_js: 10
+      after_success:
+        - npx semantic-release
