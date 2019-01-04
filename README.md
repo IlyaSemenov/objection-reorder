@@ -28,7 +28,7 @@ id | name | sort_order
 ---+------+-----------
 3  | Bar  | 1
 7  | Baz  | 2
-10 | Foo  | 3 <--- object moved here. sort_orer updated.
+10 | Foo  | 3 <--- object moved here, sort_order updated.
 8  | Qoox | 4
 ```
 
