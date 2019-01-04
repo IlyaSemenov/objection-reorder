@@ -48,8 +48,8 @@ Example:
 import set_position from 'objection-reorder'
 import MyModel from '~/my-objection-models/MyModel'
 
-const { position } = ctx.request.query
-await set_position(MyModel.query(), ctx.params.tip_id, position)
+const { object_id, position } = ctx.params
+await set_position(MyModel.query(), object_id, position)
 ```
 
 ### Options
@@ -57,7 +57,7 @@ await set_position(MyModel.query(), ctx.params.tip_id, position)
 The 4th parameter is the optional settings object. If not provided, the following defaults are used:
 
 ```ts
-await set_position(MyModel.query(), obj_id, position, {
+await set_position(MyModel.query(), object_id, position, {
   id_field: 'id',
   order_field: 'sort_order',
 })
