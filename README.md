@@ -65,7 +65,7 @@ await set_position(MyModel.query(), object_id, position, {
 
 ## Sharding
 
-Note that the ordering can be managed separately in different shards (slices) of the table. For example, if `MyModel` has parent/child relation, children of a certain parent can be reordered with:
+Ordering can be managed separately in different shards (slices) of the table. For example, if `MyModel` has parent/child relation, children of a certain parent can be reordered with:
 
 ```ts
 await set_position(MyModel.query().where({ parent }), child_id, position)
