@@ -1,4 +1,4 @@
-import { raw, QueryBuilder, Model, PartialUpdate } from "objection"
+import { Model, PartialUpdate, QueryBuilder, raw } from "objection"
 
 interface Options {
 	id_field?: string
@@ -14,7 +14,7 @@ export default async function set_position<QM extends Model>(
 	query: QueryBuilder<QM>,
 	id: any,
 	position: number,
-	options?: Options,
+	options?: Options
 ) {
 	const { id_field, order_field } = { ...default_options, ...options }
 
@@ -29,9 +29,11 @@ export default async function set_position<QM extends Model>(
 				.select(id_field)
 				.where(id_field, "!=", id)
 				.orderBy(order_field)
-				.offset(position),
+				.offset(position)
 		)
-		.update({ [order_field]: raw("?? + 2", order_field) } as PartialUpdate<QM>)
+		.update({
+			[order_field]: raw("?? + 2", order_field),
+		} as PartialUpdate<QM>)
 
 	// Then set target object's position to order_field of the first affected row (minus 1),
 	// or, if there were none, to maximum order_field across all query (plus 1).

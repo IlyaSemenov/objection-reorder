@@ -17,7 +17,7 @@ and you have a UI where a user may drag and drop objects to reorder them, produc
 POST /objects/10/order?position=2
 ```
 
-(meaning: *"put Foo onto position 2, between Baz and Qoox"*)
+(meaning: _"put Foo onto position 2, between Baz and Qoox"_)
 
 and you have a backend server with Node.js and Objection.js,
 
@@ -32,7 +32,7 @@ id | name | sort_order
 7  | Qoox | 4
 ```
 
-*(The example is provided for illustration. The actual resulting values of `sort_order` could be different due to SQL updates optimization, but the resulting order of objects is guaranteed to be correct.)*
+_(The example is provided for illustration. The actual resulting values of `sort_order` could be different due to SQL updates optimization, but the resulting order of objects is guaranteed to be correct.)_
 
 ## Installation
 
@@ -45,8 +45,8 @@ yarn add objection-reorder
 Example:
 
 ```ts
-import set_position from 'objection-reorder'
-import MyModel from '~/my-objection-models/MyModel'
+import set_position from "objection-reorder"
+import MyModel from "~/my-objection-models/MyModel"
 
 const { object_id, position } = ctx.params
 await set_position(MyModel.query(), object_id, position)
@@ -58,8 +58,8 @@ The 4th parameter is the optional settings object. If not provided, the followin
 
 ```ts
 await set_position(MyModel.query(), object_id, position, {
-  id_field: 'id',
-  order_field: 'sort_order',
+  id_field: "id",
+  order_field: "sort_order",
 })
 ```
 
@@ -77,4 +77,4 @@ While not recommended, non-unique `sort_order` values are supported. `set_positi
 
 ## Caveats
 
-* The implementation is not completely thread safe, as it runs 2 SQL queries without a transaction.
+- The implementation is not completely thread safe, as it runs 2 SQL queries without a transaction.
