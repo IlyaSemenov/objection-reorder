@@ -24,7 +24,7 @@
     "test": "vitest run"
   },
   "peerDependencies": {
-    "objection": "^1.4.0"
+    "objection": "^3"
   },
   "devDependencies": {
     "@commitlint/cli": "~17.5.0",
@@ -37,9 +37,9 @@
     "eslint-plugin-prettier": "~4.2.1",
     "eslint-plugin-simple-import-sort": "~10.0.0",
     "husky": "~8.0.3",
-    "knex": "~0.95.15",
+    "knex": "~2.4.2",
     "lint-staged": "~13.2.0",
-    "objection": "^1.4.0",
+    "objection": "~3.0.1",
     "prettier": "~2.8.7",
     "sqlite3": "~5.1.6",
     "tsup": "~6.7.0",

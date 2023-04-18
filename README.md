@@ -36,8 +36,8 @@ _(The example is provided for illustration. The actual resulting values of `sort
 
 ## Installation
 
-```
-yarn add objection-reorder
+```sh
+npm i objection-reorder
 ```
 
 ## Usage
@@ -45,36 +45,27 @@ yarn add objection-reorder
 Example:
 
 ```ts
-import set_position from "objection-reorder"
-import MyModel from "~/my-objection-models/MyModel"
+import { reorder } from "objection-reorder"
+import { MyModel } from "~/my-objection-models/MyModel"
 
-const { object_id, position } = ctx.params
-await set_position(MyModel.query(), object_id, position)
+const { id, position } = ctx.params // object ID and desired position
+await reorder(MyModel.query(), { id, sort_order: position }) // where sort_order is a non-nullable integer column, and position is desired 0-based index
 ```
 
-### Options
-
-The 4th parameter is the optional settings object. If not provided, the following defaults are used:
-
-```ts
-await set_position(MyModel.query(), object_id, position, {
-  id_field: "id",
-  order_field: "sort_order",
-})
-```
+- Database ID column will be detected with `MyModel.idColumn` (composite keys not currently supported).
+- The other field will be treated as storing the sort order.
 
 ## Sharding
 
 Ordering can be managed separately in different shards (slices) of the table. For example, if `MyModel` has parent/child relation, children of a certain parent can be reordered with:
 
 ```ts
-await set_position(MyModel.query().where({ parent }), child_id, position)
+await reorder(MyModel.query().where({ parent }), {
+  id: child_id,
+  sort_order: position,
+})
 ```
 
-## Non-unique `sort_order` field
+## Non-unique sort order values
 
-While not recommended, non-unique `sort_order` values are supported. `set_position` will work correctly even if e.g. all values are set to 0. (In particular, that means you don't necessarily have to come up with a data migration when introducing the custom order field).
-
-## Caveats
-
-- The implementation is not completely thread safe, as it runs 2 SQL queries without a transaction.
+While not recommended, non-unique sort order values are supported. `reorder` will work correctly even if e.g. all values are set to 0. (In particular, that means you don't necessarily have to come up with a data migration when introducing the custom order field).
